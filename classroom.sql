@@ -1,0 +1,69 @@
+DROP TABLE IF EXISTS Comments CASCADE;
+DROP TABLE IF EXISTS Submissions CASCADE;
+DROP TABLE IF EXISTS News CASCADE;
+DROP TABLE IF EXISTS Assignments CASCADE;
+DROP TABLE IF EXISTS Classes CASCADE;
+DROP TABLE IF EXISTS Users CASCADE;
+DROP TABLE IF EXISTS Roles CASCADE;
+
+CREATE TABLE Roles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    role_id INT REFERENCES Roles(id) ON DELETE SET NULL
+);
+
+CREATE TABLE Classes (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    teacher_name VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
+
+CREATE TABLE Assignments (
+    id SERIAL PRIMARY KEY,
+    class_id INT REFERENCES Classes(id) ON DELETE CASCADE,
+    description TEXT NOT NULL,
+    date DATE NOT NULL,
+    due DATE NOT NULL
+);
+
+CREATE TABLE Submissions (
+    id SERIAL PRIMARY KEY,
+    assignment_id INT REFERENCES Assignments(id) ON DELETE CASCADE,
+    user_id INT REFERENCES Users(id) ON DELETE CASCADE,
+    date DATE NOT NULL,
+    file TEXT NOT NULL,
+    grade VARCHAR(10)
+);
+
+CREATE TABLE News (
+    id SERIAL PRIMARY KEY,
+    class_id INT REFERENCES Classes(id) ON DELETE CASCADE,
+    user_id INT REFERENCES Users(id) ON DELETE CASCADE,
+    date DATE NOT NULL,
+    message TEXT NOT NULL
+);
+
+CREATE TABLE Comments (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(id) ON DELETE CASCADE,
+    assignment_id INT REFERENCES Assignments(id) ON DELETE CASCADE,
+    date DATE NOT NULL,
+    message TEXT NOT NULL
+);
+SELECT * FROM Roles;
+SELECT * FROM Users;
+SELECT * FROM Classes;
+SELECT * FROM Assignments;
+SELECT * FROM Submissions;
+SELECT * FROM News;
+SELECT * FROM Comments;
