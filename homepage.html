@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyNest</title>
+    <link rel="stylesheet" href="hp.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+</head>
+<body>
+    <div class="page-wrapper" style="display: flex;">
+        <div class="sidebar">
+            <div class="logo">
+            <img src="images/logo.png" alt="Course Logo">
+            <h2>StudyNest</h2>
+        </div>
+        <ul>
+            <li class="active">Dashboard</li>
+            <li><a href="inbox.html" style="text-decoration: none; color: inherit;">Inbox</a></li>
+            <li>Classes</li>
+            <li>Assignments</li>
+            <li>Group</li>
+        </ul>
+        <div class="friends-header">
+            <h3>Friends</h3>
+            <input type="text" id="friendInput" placeholder="Enter friend's name">
+            <button onclick="addFriend()">Add</button>
+        </div>
+        
+        <ul class="friends-list" id="friendsList">
+            
+        </ul>
+        
+        <h3>Settings</h3>
+<ul>
+  <li><a href="profile.html" style="text-decoration: none; color: inherit;">Profile</a></li>
+  <li><a href="login.html" style="text-decoration: none; color: inherit;">Logout</a></li>
+</ul>
+
+        </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <input type="text" placeholder="Search your course here...">
+        </div>
+        <div class="banner">
+            <h1>Sharpen Your Skills With Professional Online Courses</h1>
+            <button>Join Now</button>
+        </div>
+        <div class="continue-watching">
+            <h2>Continue Watching</h2>
+            <div class="course-list" id="courseList">
+                <div class="course-card">
+                    <span class="delete-course" onclick="deleteClass(this)">❌</span>
+                    <h3>Beginner's Guide To Becoming A Professional Frontend Developer</h3>
+                    <p>Instructor: Prashant Kumar Singh</p>
+                </div>
+                <div class="course-card">
+                    <span class="delete-course" onclick="deleteClass(this)">❌</span>
+                    <h3>How To Create Your Online Course</h3>
+                    <p>Instructor: Prashant Kumar Singh</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<button class="floating-btn">
+    +
+</button>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2>Add Class</h2>
+        <form onsubmit="addClass(event)">
+            <label for="course-name">Class Name:</label>
+            <input type="text" id="course-name" required><br><br>
+            
+            <label for="course-description">Code:</label>
+            <textarea id="course-description" required></textarea><br><br>
+            
+            <button type="submit">Join</button>
+        </form>
+    </div>
+</div>
+
+
+    
+
+    <script>
+        function addFriend() {
+          const input = document.getElementById("friendInput");
+          const name = input.value.trim();
+          if (name === "") return;
+      
+          const li = document.createElement("li");
+          li.innerHTML = `${name} <button onclick="deleteFriend(this)">Delete</button>`;
+          document.getElementById("friendsList").appendChild(li);
+          input.value = "";
+        }
+      
+        function deleteFriend(button) {
+          const li = button.parentElement;
+          li.remove();
+        }
+  const modal = document.getElementById("modal");
+  const floatingBtn = document.querySelector(".floating-btn");
+
+  floatingBtn.onclick = () => modal.style.display = "block";
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+
+  function addClass(event) {
+    event.preventDefault();
+    const name = document.getElementById("course-name").value.trim();
+    const instructor = document.getElementById("course-description").value.trim();
+
+    if (!name || !instructor) return;
+
+    const courseList = document.getElementById("courseList");
+    const card = document.createElement("div");
+    card.className = "course-card";
+    card.innerHTML = `
+      <span class="delete-course" onclick="deleteClass(this)">❌</span>
+      <img src="course1.jpg" alt="Course Thumbnail">
+      <h3>${name}</h3>
+      <p>Instructor: ${instructor}</p>
+    `;
+    courseList.appendChild(card);
+
+    document.getElementById("course-name").value = "";
+    document.getElementById("course-description").value = "";
+    closeModal();
+  }
+
+  function deleteClass(btn) {
+    btn.parentElement.remove();
+  }
+      </script>
+    <script src="hpage.js"></script>
+    
+</body>
+</html>

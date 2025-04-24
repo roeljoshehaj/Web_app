@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Profile</title>
+  <link rel="stylesheet" href="profile.css" />
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-card">
+      <div class="profile-pic-wrapper">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Profile" class="profile-pic" />
+      </div>
+      <h2 id="fullname">Full Name</h2>
+      <p class="tagline" id="role">Role</p>
+
+      <div class="info-block">
+        <p><strong>Username:</strong> <span id="username">Loading...</span></p>
+        <p><strong>Email:</strong> <span id="email">Loading...</span></p>
+        <p><strong>Phone:</strong> <span id="phone">Loading...</span></p>
+        <p><strong>Gender:</strong> <span id="gender">Loading...</span></p>
+
+      </div>
+      
+
+      <div class="progress-chart">
+        <div class="bar" style="height: 80%"></div>
+        <div class="bar" style="height: 60%"></div>
+        <div class="bar" style="height: 40%"></div>
+        <div class="bar" style="height: 20%"></div>
+      </div>
+
+      <div class="mentors">
+        <div class="mentor-search">        
+          <div class="add-mentor">
+            <input type="text" id="mentorInput" placeholder="Add a mentor name..." />
+            <button onclick="addMentor()">Add</button>
+          </div>
+          <h3>Your Mentors</h3>
+        
+          <ul id="mentorList" class="mentor-list"></ul>
+        </div>
+        
+    </div>
+    
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+  
+    if (user) {
+      document.getElementById("fullname").textContent = user.fullName || "N/A";
+      document.getElementById("username").textContent = user.username || "N/A";
+      document.getElementById("email").textContent = user.email || "N/A";
+      document.getElementById("phone").textContent = user.phone || "N/A";
+      document.getElementById("role").textContent = user.role || "N/A";
+      
+      const genderElement = document.getElementById("gender");
+      if (genderElement) genderElement.textContent = user.gender || "N/A";
+    } else {
+      window.location.href = "login.html";
+    }
+
+    function addMentor() {
+    const input = document.getElementById("mentorInput");
+    const name = input.value.trim();
+    if (!name) return;
+
+    const mentorList = document.getElementById("mentorList");
+    const li = document.createElement("li");
+    li.className = "mentor-name";
+    li.textContent = name;
+    mentorList.appendChild(li);
+    input.value = "";
+  }
+
+  </script>
+  
+  
+</body>
+</html>
