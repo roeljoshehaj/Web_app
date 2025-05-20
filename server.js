@@ -104,3 +104,19 @@ app.get('/me', (req, res) => {
     res.status(403).json({ error: 'Invalid token' });
   }
 });
+app.get("/api/classes/:id", async (req, res) => {
+  const classId = req.params.id;
+
+  try {
+    const result = await pool.query("SELECT * FROM classes WHERE id = $1", [classId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Class not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Error retrieving class:", err);
+    res.status(500).json({ error: "Database error" });
+  }
+});

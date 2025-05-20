@@ -1,3 +1,4 @@
+//This is not finished.
 const inbox = document.getElementById("inbox");
 const chatView = document.getElementById("chatView");
 const chatHeader = document.getElementById("chatHeader");

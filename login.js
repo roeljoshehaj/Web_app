@@ -18,8 +18,9 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     if (!res.ok) {
       return alert(data.error || "Login failed");
     }
+    window.location.href = "homepage.html";
 
-    // ✅ Save token and get full user data
+
     localStorage.setItem("token", data.token);
 
     const profileRes = await fetch("http://localhost:3000/me", {
@@ -30,7 +31,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     console.log("✅ User from /me:", user);
     localStorage.setItem("user", JSON.stringify(user));
 
-    window.location.href = "profile.html";
+    window.location.href = "homepage.html";
   } catch (err) {
     console.error("❌ Login error:", err);
     alert("Something went wrong during login.");

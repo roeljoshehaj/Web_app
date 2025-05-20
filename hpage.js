@@ -1,3 +1,4 @@
+//This is not finished.
 document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ hpage.js loaded");
   
@@ -42,4 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
         profileSection.innerHTML = `<p style="color: red;">Could not load profile. Try logging in again.</p>`;
       });
   });
-  
+  function viewClass(classId) {
+  window.location.href = `class.html?classId=${classId}`;
+}
