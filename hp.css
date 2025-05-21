@@ -331,4 +331,15 @@ button[type="submit"]:hover {
   .profile p {
     margin: 4px 0;
   }
-  
+.view-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.view-btn:hover {
+  background-color: #45a049;
+}

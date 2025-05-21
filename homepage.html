@@ -52,14 +52,17 @@
             <h2>Continue Watching</h2>
             <div class="course-list" id="courseList">
                 <div class="course-card">
-                    <span class="delete-course" onclick="deleteClass(this)">❌</span>
-                    <h3>Beginner's Guide To Becoming A Professional Frontend Developer</h3>
-                    <p>Instructor:</p>
-                </div>
+                  <span class="delete-course" onclick="deleteClass(this)">❌</span>
+                     <h3>Beginner's Guide To Becoming A Professional Frontend Developer</h3>
+                      <p>Instructor:</p>
+                      <button class="view-btn" onclick="window.location.href='classes.html'">View Class</button>
+            </div>
+
                 <div class="course-card">
                     <span class="delete-course" onclick="deleteClass(this)">❌</span>
                     <h3>How To Create Your Online Course</h3>
                     <p>Instructor:</p>
+                    <button class="view-btn" onclick="window.location.href='classes.html'">View Class</button>
                 </div>
             </div>
             
@@ -83,9 +86,6 @@
         </form>
     </div>
 </div>
-
-
-    
 
     <script>
         function addFriend() {
@@ -127,12 +127,14 @@
     const courseList = document.getElementById("courseList");
     const card = document.createElement("div");
     card.className = "course-card";
-    card.innerHTML = `
-      <span class="delete-course" onclick="deleteClass(this)">❌</span>
-      <img src="course1.jpg" alt="Course Thumbnail">
-      <h3>${name}</h3>
-      <p>Instructor: ${instructor}</p>
-    `;
+   card.innerHTML = `
+  <span class="delete-course" onclick="deleteClass(this)">❌</span>
+  <img src="course1.jpg" alt="Course Thumbnail">
+  <h3>${name}</h3>
+  <p>Instructor: ${instructor}</p>
+<button class="view-btn" onclick="window.location.href='classes.html'">View Class</button>
+`;
+
     courseList.appendChild(card);
 
     document.getElementById("course-name").value = "";
